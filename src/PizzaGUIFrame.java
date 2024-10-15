@@ -119,14 +119,11 @@ public class PizzaGUIFrame extends JFrame {
         final double taxRate = 0.07;
 
         orderBtn.addActionListener((ActionEvent ae) -> {
-            // Start building the result string
             StringBuilder res = new StringBuilder("Your Order:\n");
             res.append("==========================================\n");
 
-            // Get base cost from the selected size
             double subtotal = sizePrices[sizeComboBox.getSelectedIndex()];
 
-            // Add crust type
             if (thinCrustRadioBtn.isSelected())
                 res.append("Thin Crust ");
             else if (regularCrustRadioBtn.isSelected())
@@ -134,10 +131,8 @@ public class PizzaGUIFrame extends JFrame {
             else if (deepDishRadioBtn.isSelected())
                 res.append("Deep-Dish Crust ");
 
-            // Add the selected size to the order summary
             res.append((String) sizeComboBox.getSelectedItem()).append("\n");
 
-            // Check toppings and add their cost to subtotal
             if (goblinCB.isSelected()) {
                 res.append("Goblin Ears - $1.00\n");
                 subtotal += 1.00;
@@ -163,11 +158,9 @@ public class PizzaGUIFrame extends JFrame {
                 subtotal += 1.00;
             }
 
-            // Calculate tax and total cost
             double tax = subtotal * taxRate;
             double totalCost = subtotal + tax;
 
-            // Add subtotal, tax, and total to the result string
             res.append("\n==========================================\n");
             res.append(String.format("Subtotal: $%.2f\n", subtotal));
             res.append(String.format("Tax (7%%): $%.2f\n", tax));
@@ -175,7 +168,6 @@ public class PizzaGUIFrame extends JFrame {
             res.append(String.format("Total: $%.2f\n", totalCost));
             res.append("==========================================\n");
 
-            // Display the order summary in the text area
             orderSummary.setText(res.toString());
         });
         clearBtn.addActionListener((ActionEvent ae) -> {
